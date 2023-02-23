@@ -1,0 +1,11 @@
+Delete Array by Index in mongodb... 
+router.post("/deleteByIndex",(req,res)=>{
+  const {id,indexData} = req.body
+  checkoutModal.update({orderId:id},{$unset:{["productList." + indexData]:1}},{new:true},(err,data)=>{
+    if(data){
+      checkoutModal.update({orderId:id},{$pull:{productList:null}}).exec((err,data)=>{
+        console.log(data)    
+        });
+       }
+     });
+   })
